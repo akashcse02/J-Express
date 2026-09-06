@@ -11,21 +11,18 @@ app.put('/posts/:id', (req, res) => {
     if (!title && !content) {
         return res.status(400).json({ 
             success: false, 
-            message: 'Please provide at least one field to update.' 
+            message: 'Please provide title or content to update.' 
         });
     }
 
-    const updatedPost = {
-        id: postId,
-        title: title || 'Original Title', 
-        content: content || 'Original Content',
-        updatedAt: new Date()
-    };
-
     res.status(200).json({ 
         success: true,
-        message: 'Post updated successfully!',
-        data: updatedPost
+        message: `Post ${postId} updated successfully!`,
+        data: {
+            id: postId,
+            title: title || 'Previous Title',
+            content: content || 'Previous Content'
+        }
     }); 
 }); 
 
